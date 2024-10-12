@@ -190,7 +190,7 @@ class phc_wg_het(pya.PCellDeclarationHelper):
         pin_w = 500
         wg_pos = a * math.sqrt(3) / 2 * wg_dis
 
-        t = pya.Trans(Trans.R0, -length_slab_x / 2, wg_pos)
+        t = pya.Trans(Trans.R180, -length_slab_x / 2, wg_pos) # Rotated by 180 to allow for matching
         pin = pya.Path(
             [pya.Point(-pin_length / 2, 0), pya.Point(pin_length / 2, 0)], pin_w
         )
@@ -200,7 +200,7 @@ class phc_wg_het(pya.PCellDeclarationHelper):
         shape = self.cell.shapes(LayerPinRecN).insert(text)
         shape.text_size = 0.4 / dbu
 
-        t = pya.Trans(Trans.R180, length_slab_x / 2, wg_pos) # Rotated by 180 to allow for matching
+        t = pya.Trans(Trans.R0, length_slab_x / 2, wg_pos) 
         pin_t = pin.transformed(t)
         self.cell.shapes(LayerPinRecN).insert(pin_t)
         text = pya.Text("pin2", t)
